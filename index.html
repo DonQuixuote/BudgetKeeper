@@ -108,11 +108,6 @@
                                             <label>Annual Yield (%)</label>
                                             <input type="number" class="savings-yield" min="0" max="100" step="0.01" value="0">
                                         </div>
-                                        <div class="form-group">
-                                            <label>Goal Amount</label>
-                                            <input type="number" class="savings-goal-amount" min="0" step="0.01">
-                                            <small class="help-text">Optional: Set a target amount for this savings goal</small>
-                                        </div>
                                     </div>
                                     <button type="button" class="btn btn-danger remove-expense">Remove</button>
                                 </div>
@@ -142,26 +137,6 @@
                                                 <input type="checkbox" class="expense-recurring">
                                                 <span>Recurring monthly</span>
                                             </label>
-                                        </div>
-                                        <div class="form-group checkbox-group">
-                                            <label class="checkbox-label">
-                                                <input type="checkbox" class="expense-split">
-                                                <span>Split with others</span>
-                                            </label>
-                                        </div>
-                                        <div class="split-details" style="display: none;">
-                                            <div class="form-group">
-                                                <label>Split with (Name)</label>
-                                                <input type="text" class="split-partner-name">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Your Share (%)</label>
-                                                <input type="number" class="split-percentage" min="0" max="100" value="50">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Partner's Share (%)</label>
-                                                <input type="number" class="partner-percentage" min="0" max="100" value="50" readonly>
-                                            </div>
                                         </div>
                                     </div>
                                     <button type="button" class="btn btn-danger remove-expense">Remove</button>
@@ -193,26 +168,6 @@
                                                 <span>Recurring monthly</span>
                                             </label>
                                         </div>
-                                        <div class="form-group checkbox-group">
-                                            <label class="checkbox-label">
-                                                <input type="checkbox" class="expense-split">
-                                                <span>Split with others</span>
-                                            </label>
-                                        </div>
-                                        <div class="split-details" style="display: none;">
-                                            <div class="form-group">
-                                                <label>Split with (Name)</label>
-                                                <input type="text" class="split-partner-name">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Your Share (%)</label>
-                                                <input type="number" class="split-percentage" min="0" max="100" value="50">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Partner's Share (%)</label>
-                                                <input type="number" class="partner-percentage" min="0" max="100" value="50" readonly>
-                                            </div>
-                                        </div>
                                     </div>
                                     <button type="button" class="btn btn-danger remove-expense">Remove</button>
                                 </div>
@@ -242,26 +197,6 @@
                                                 <input type="checkbox" class="expense-recurring">
                                                 <span>Recurring monthly</span>
                                             </label>
-                                        </div>
-                                        <div class="form-group checkbox-group">
-                                            <label class="checkbox-label">
-                                                <input type="checkbox" class="expense-split">
-                                                <span>Split with others</span>
-                                            </label>
-                                        </div>
-                                        <div class="split-details" style="display: none;">
-                                            <div class="form-group">
-                                                <label>Split with (Name)</label>
-                                                <input type="text" class="split-partner-name">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Your Share (%)</label>
-                                                <input type="number" class="split-percentage" min="0" max="100" value="50">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Partner's Share (%)</label>
-                                                <input type="number" class="partner-percentage" min="0" max="100" value="50" readonly>
-                                            </div>
                                         </div>
                                     </div>
                                     <button type="button" class="btn btn-danger remove-expense">Remove</button>
@@ -293,26 +228,6 @@
                                                 <span>Recurring monthly</span>
                                             </label>
                                         </div>
-                                        <div class="form-group checkbox-group">
-                                            <label class="checkbox-label">
-                                                <input type="checkbox" class="expense-split">
-                                                <span>Split with others</span>
-                                            </label>
-                                        </div>
-                                        <div class="split-details" style="display: none;">
-                                            <div class="form-group">
-                                                <label>Split with (Name)</label>
-                                                <input type="text" class="split-partner-name">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Your Share (%)</label>
-                                                <input type="number" class="split-percentage" min="0" max="100" value="50">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Partner's Share (%)</label>
-                                                <input type="number" class="partner-percentage" min="0" max="100" value="50" readonly>
-                                            </div>
-                                        </div>
                                     </div>
                                     <button type="button" class="btn btn-danger remove-expense">Remove</button>
                                 </div>
@@ -332,45 +247,72 @@
                     <h3>Hello, <span id="summary-name"></span>!</h3>
                 </div>
                 
-                <div class="summary-content">
-                    <div class="income-summary">
-                        <h3>Income Overview</h3>
-                        <p>Monthly Income: $<span id="summary-income"></span></p>
-                        <p>Income Frequency: <span id="summary-frequency"></span></p>
-                        <p>Paydays: <span id="summary-paydays"></span></p>
+                <!-- Add Upcoming Expenses Section -->
+                <div class="upcoming-expenses">
+                    <h3>Upcoming Due Dates</h3>
+                    <div id="upcoming-expenses-list">
+                        <!-- Upcoming expenses will be populated here -->
                     </div>
+                </div>
 
-                    <div class="savings-summary">
-                        <h3>Savings Goals</h3>
-                        <p>Monthly Target: <span id="summary-savings-target"></span>%</p>
-                        <div id="savings-goals-list">
-                            <!-- Savings goals with progress wheels will be added here -->
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <h3>Monthly Income</h3>
+                        <p id="monthly-income">$0.00</p>
+                    </div>
+                    <div class="summary-item">
+                        <h3>Target Savings</h3>
+                        <p id="target-savings">$0.00</p>
+                    </div>
+                    <div class="summary-item">
+                        <h3>Total Expenses</h3>
+                        <p id="total-expenses">$0.00</p>
+                    </div>
+                    <div class="summary-item">
+                        <h3>Current Budget</h3>
+                        <p id="remaining-budget">$0.00</p>
+                    </div>
+                </div>
+
+                <div class="outstanding-section">
+                    <h3>Outstanding Balance</h3>
+                    <div class="summary-grid">
+                        <div class="summary-item warning">
+                            <h3>Total Outstanding</h3>
+                            <p id="total-outstanding">$0.00</p>
                         </div>
-                    </div>
-
-                    <div class="expenses-summary">
-                        <h3>Expense Breakdown</h3>
-                        <div class="expense-categories-summary">
-                            <!-- Category summaries will be added here -->
-                        </div>
-                    </div>
-
-                    <div class="paycheck-breakdown">
-                        <h3>Paycheck Breakdown</h3>
-                        <div id="paycheck-expenses">
-                            <!-- Paycheck expenses will be added here -->
+                        <div class="summary-item success">
+                            <h3>Budget After Outstanding</h3>
+                            <p id="budget-after-outstanding">$0.00</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="action-buttons">
-                    <button type="button" class="btn btn-secondary" id="edit-budget">Edit Budget</button>
-                    <button type="button" class="btn btn-primary" id="save-profile">Save Profile</button>
+                <div class="expense-breakdown">
+                    <h3>Expense Breakdown</h3>
+                    <div id="expense-details">
+                        <!-- Expense details will be populated here -->
+                    </div>
                 </div>
+
+                <div class="notification-settings">
+                    <h3>Reminder Settings</h3>
+                    <div class="form-group">
+                        <label for="reminder-days">Remind me</label>
+                        <select id="reminder-days">
+                            <option value="1">1 day</option>
+                            <option value="3" selected>3 days</option>
+                            <option value="7">1 week</option>
+                            <option value="14">2 weeks</option>
+                        </select>
+                        <span>before due date</span>
+                    </div>
+                </div>
+
+                <button id="start-over" class="btn btn-secondary">Start Over</button>
             </section>
         </main>
     </div>
-
     <script src="app.js"></script>
 </body>
 </html> 
