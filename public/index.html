@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Keeper</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <header class="header">
+            <h1>Budget Keeper</h1>
+        </header>
+        
+        <main class="main-content">
+            <!-- Profile Management -->
+            <div class="profile-management">
+                <div class="profile-selector">
+                    <label for="profile-select">Select Profile</label>
+                    <select id="profile-select">
+                        <option value="">Create New Profile</option>
+                    </select>
+                </div>
+                <div id="profile-list" class="profile-list">
+                    <!-- Profile list will be populated here -->
+                </div>
+            </div>
+
+            <!-- Step indicator -->
+            <div class="steps-indicator">
+                <div class="step active" data-step="1">Profile</div>
+                <div class="step" data-step="2">Income</div>
+                <div class="step" data-step="3">Expenses</div>
+                <div class="step" data-step="4">Summary</div>
+            </div>
+
+            <!-- Profile Section -->
+            <section id="profile-section" class="form-section active">
+                <h2>Your Profile</h2>
+                <form id="profile-form">
+                    <div class="form-group">
+                        <label for="user-name">Name</label>
+                        <input type="text" id="user-name" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Next</button>
+                </form>
+            </section>
+
+            <!-- Income Section -->
+            <section id="income-section" class="form-section">
+                <h2>Income Details</h2>
+                <form id="income-form">
+                    <div class="form-group">
+                        <label for="income-amount">Monthly Income</label>
+                        <input type="number" id="income-amount" min="0" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="income-frequency">Income Frequency</label>
+                        <select id="income-frequency" required>
+                            <option value="monthly">Monthly</option>
+                            <option value="biweekly">Bi-weekly</option>
+                            <option value="weekly">Weekly</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="income-paydays">Paydays (comma-separated days of month, e.g., 15,30)</label>
+                        <input type="text" id="income-paydays" placeholder="15,30" required>
+                        <small class="help-text">Enter the days of the month when you receive your paycheck</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="savings-goal">Monthly Savings Goal (%)</label>
+                        <input type="number" id="savings-goal" min="0" max="100" value="20" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Next</button>
+                </form>
+            </section>
+
+            <!-- Expenses Section -->
+            <section id="expenses-section" class="form-section">
+                <h2>Monthly Expenses</h2>
+                <form id="expenses-form">
+                    <div class="expense-categories">
+                        <div class="category">
+                            <h3>Savings</h3>
+                            <div id="savings-expenses">
+                                <div class="expense-entry">
+                                    <div class="expense-entry-fields">
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <input type="text" class="expense-label" placeholder="e.g., Emergency Fund" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Amount</label>
+                                            <input type="number" class="expense-amount" min="0" step="0.01" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Due Date</label>
+                                            <input type="date" class="expense-due-date" required>
+                                        </div>
+                                        <div class="form-group checkbox-group">
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" class="expense-recurring" checked>
+                                                <span>Recurring monthly</span>
+                                            </label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Annual Yield (%)</label>
+                                            <input type="number" class="savings-yield" min="0" max="100" step="0.01" value="0">
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-danger remove-expense">Remove</button>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-secondary add-expense" data-category="savings">+ Add Savings Goal</button>
+                        </div>
+
+                        <div class="category">
+                            <h3>Housing</h3>
+                            <div id="housing-expenses">
+                                <div class="expense-entry">
+                                    <div class="expense-entry-fields">
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <input type="text" class="expense-label" placeholder="e.g., Apartment Rent" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Amount</label>
+                                            <input type="number" class="expense-amount" min="0" step="0.01" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Due Date</label>
+                                            <input type="date" class="expense-due-date" required>
+                                        </div>
+                                        <div class="form-group checkbox-group">
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" class="expense-recurring">
+                                                <span>Recurring monthly</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-danger remove-expense">Remove</button>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-secondary add-expense" data-category="housing">+ Add Housing Expense</button>
+                        </div>
+
+                        <div class="category">
+                            <h3>Debt Payments</h3>
+                            <div id="debt-expenses">
+                                <div class="expense-entry">
+                                    <div class="expense-entry-fields">
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <input type="text" class="expense-label" placeholder="e.g., Car Loan" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Amount</label>
+                                            <input type="number" class="expense-amount" min="0" step="0.01" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Due Date</label>
+                                            <input type="date" class="expense-due-date" required>
+                                        </div>
+                                        <div class="form-group checkbox-group">
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" class="expense-recurring">
+                                                <span>Recurring monthly</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-danger remove-expense">Remove</button>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-secondary add-expense" data-category="debt">+ Add Debt Payment</button>
+                        </div>
+
+                        <div class="category">
+                            <h3>Subscriptions</h3>
+                            <div id="subscription-expenses">
+                                <div class="expense-entry">
+                                    <div class="expense-entry-fields">
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <input type="text" class="expense-label" placeholder="e.g., Netflix" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Amount</label>
+                                            <input type="number" class="expense-amount" min="0" step="0.01" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Due Date</label>
+                                            <input type="date" class="expense-due-date" required>
+                                        </div>
+                                        <div class="form-group checkbox-group">
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" class="expense-recurring">
+                                                <span>Recurring monthly</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-danger remove-expense">Remove</button>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-secondary add-expense" data-category="subscription">+ Add Subscription</button>
+                        </div>
+
+                        <div class="category">
+                            <h3>Other Essentials</h3>
+                            <div id="essential-expenses">
+                                <div class="expense-entry">
+                                    <div class="expense-entry-fields">
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <input type="text" class="expense-label" placeholder="e.g., Groceries" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Amount</label>
+                                            <input type="number" class="expense-amount" min="0" step="0.01" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Due Date</label>
+                                            <input type="date" class="expense-due-date" required>
+                                        </div>
+                                        <div class="form-group checkbox-group">
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" class="expense-recurring">
+                                                <span>Recurring monthly</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-danger remove-expense">Remove</button>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-secondary add-expense" data-category="essential">+ Add Essential Expense</button>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Calculate Budget</button>
+                </form>
+            </section>
+
+            <!-- Budget Summary Section -->
+            <section id="summary-section" class="form-section">
+                <h2>Budget Summary</h2>
+                <div class="user-greeting">
+                    <h3>Hello, <span id="summary-name"></span>!</h3>
+                </div>
+                
+                <!-- Add Upcoming Expenses Section -->
+                <div class="upcoming-expenses">
+                    <h3>Upcoming Due Dates</h3>
+                    <div id="upcoming-expenses-list">
+                        <!-- Upcoming expenses will be populated here -->
+                    </div>
+                </div>
+
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <h3>Monthly Income</h3>
+                        <p id="monthly-income">$0.00</p>
+                    </div>
+                    <div class="summary-item">
+                        <h3>Target Savings</h3>
+                        <p id="target-savings">$0.00</p>
+                    </div>
+                    <div class="summary-item">
+                        <h3>Total Expenses</h3>
+                        <p id="total-expenses">$0.00</p>
+                    </div>
+                    <div class="summary-item">
+                        <h3>Current Budget</h3>
+                        <p id="remaining-budget">$0.00</p>
+                    </div>
+                </div>
+
+                <div class="outstanding-section">
+                    <h3>Outstanding Balance</h3>
+                    <div class="summary-grid">
+                        <div class="summary-item warning">
+                            <h3>Total Outstanding</h3>
+                            <p id="total-outstanding">$0.00</p>
+                        </div>
+                        <div class="summary-item success">
+                            <h3>Budget After Outstanding</h3>
+                            <p id="budget-after-outstanding">$0.00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="expense-breakdown">
+                    <h3>Expense Breakdown</h3>
+                    <div id="expense-details">
+                        <!-- Expense details will be populated here -->
+                    </div>
+                </div>
+
+                <div class="notification-settings">
+                    <h3>Reminder Settings</h3>
+                    <div class="form-group">
+                        <label for="reminder-days">Remind me</label>
+                        <select id="reminder-days">
+                            <option value="1">1 day</option>
+                            <option value="3" selected>3 days</option>
+                            <option value="7">1 week</option>
+                            <option value="14">2 weeks</option>
+                        </select>
+                        <span>before due date</span>
+                    </div>
+                </div>
+
+                <button id="start-over" class="btn btn-secondary">Start Over</button>
+            </section>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html> 
